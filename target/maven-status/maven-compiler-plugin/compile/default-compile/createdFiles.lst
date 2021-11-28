@@ -1,5 +1,4 @@
+Utils/DatabaseManager.class
 Beans/HitsData.class
 Utils/XValueValidator.class
-Utils/DatabaseManager.class
-Beans/Hit.class
 Beans/HitsData$YPair.class

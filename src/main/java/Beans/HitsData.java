@@ -4,6 +4,9 @@ import javax.faces.bean.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import Entity.Hit;
+import Utils.DatabaseManager;
 import lombok.*;
 
 
@@ -14,7 +17,8 @@ import lombok.*;
 public class HitsData implements Serializable {
     private static final long serialVersionUID = 1L;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-    private List<Hit> hitsList = new ArrayList<>();
+    private DatabaseManager dbManager = new DatabaseManager();
+    private List<Hit> hitsList = dbManager.getHitList();
 
     private double x;
     private double r = 2;
@@ -58,7 +62,12 @@ public class HitsData implements Serializable {
                 execTime = (double) (System.nanoTime() - startTime) / 1000000;
 
                 Hit newHit = new Hit(x, yPair.getValue(), r, curTime, execTime, result);
-                hitsList.add(newHit);
+                if(dbManager.addHit(newHit)) {
+                    hitsList.add(newHit);
+                }
+                else{
+                    System.out.println("add failed");
+                }
             }
         }
     }
@@ -75,11 +84,21 @@ public class HitsData implements Serializable {
         execTime = (double) (System.nanoTime() - startTime) / 1000000;
 
         Hit newHit = new Hit(svgX, svgY, svgR, curTime, execTime, result);
-        hitsList.add(newHit);
+        if (dbManager.addHit(newHit)){
+            hitsList.add(newHit);
+        }
+        else {
+            System.out.println("svgAdd failed");
+        }
     }
 
     public void clear() {
-        hitsList.clear();
+        if (dbManager.clearList()) {
+            hitsList.clear();
+        }
+        else {
+            System.out.println("clear failed");
+        }
     }
 
 
