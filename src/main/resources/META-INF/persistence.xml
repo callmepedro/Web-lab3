@@ -10,13 +10,12 @@
     <class>Entity.Hit</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
-      <property name="javax.persistence.jdbc.user" value="callmepedro"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://pg:5432/studs"/>
+      <property name="javax.persistence.jdbc.user" value=""/>
       <property name="javax.persistence.jdbc.password" value=""/>
 
       <property name="eclipselink.ddl-generation" value="create-tables"/>
       <property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>
-<!--      <property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/>-->
       <property name="eclipselink.ddl-generation.output-mode" value="both"/>
     </properties>
   </persistence-unit>

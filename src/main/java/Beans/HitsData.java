@@ -43,7 +43,7 @@ public class HitsData implements Serializable {
         }
     }
 
-    public void addHit() {
+    synchronized public void addHit() {
         long startTime = System.nanoTime();
 
         YPair y1 = new YPair(yState1, yVal1);
@@ -54,7 +54,7 @@ public class HitsData implements Serializable {
         YPair y6 = new YPair(yState6, yVal6);
         YPair y7 = new YPair(yState7, yVal7);
 
-        List<YPair> yPairs = List.of(y1, y2, y3, y4, y5, y6, y7);
+        List<YPair> yPairs = Arrays.asList(y1, y2, y3, y4, y5, y6, y7);
         for (YPair yPair : yPairs) {
             if (yPair.isState()) {
                 curTime = dateFormat.format(new Date());
@@ -64,9 +64,6 @@ public class HitsData implements Serializable {
                 Hit newHit = new Hit(x, yPair.getValue(), r, curTime, execTime, result);
                 if(dbManager.addHit(newHit)) {
                     hitsList.add(newHit);
-                }
-                else{
-                    System.out.println("add failed");
                 }
             }
         }
@@ -87,17 +84,11 @@ public class HitsData implements Serializable {
         if (dbManager.addHit(newHit)){
             hitsList.add(newHit);
         }
-        else {
-            System.out.println("svgAdd failed");
-        }
     }
 
     public void clear() {
         if (dbManager.clearList()) {
             hitsList.clear();
-        }
-        else {
-            System.out.println("clear failed");
         }
     }
 

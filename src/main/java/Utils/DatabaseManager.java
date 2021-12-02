@@ -13,7 +13,7 @@ public class DatabaseManager {
     private final EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
     private final EntityManager entityManager = factory.createEntityManager();
 
-    public boolean addHit(Hit hit) {
+    synchronized public boolean addHit(Hit hit) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(hit);
@@ -25,7 +25,7 @@ public class DatabaseManager {
         }
     }
 
-    public List<Hit> getHitList() {
+    synchronized public List<Hit> getHitList() {
         try {
             entityManager.getTransaction().begin();
             Query query = entityManager.createQuery("SELECT o FROM Hit o");

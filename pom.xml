@@ -6,7 +6,7 @@
 
     <groupId>com.labs</groupId>
     <artifactId>Lab3</artifactId>
-    <version>1.0</version>
+    <version>1.2</version>
     <packaging>war</packaging>
 
     <properties>
@@ -70,8 +70,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>9</source>
-                    <target>9</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 
